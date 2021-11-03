@@ -60,12 +60,14 @@ class NetworkConfig(Config):
         return cls
 
     @classmethod
-    def mod_net(cls, m=2, num_nodes=1000, transforms=None, weights=None, layers=None):
+    def mod_net(cls, cliques=2, cliq_size=500, m=2, num_nodes=1000, transforms=None, weights=None, layers=None):
         """Returns a modular network generator object"""
         cls = cls()
         cls.name = "ModuleNetworkGenerator"
         cls.num_nodes = num_nodes
         cls.m = m
+        cls.cliques = cliques
+        cls.cliq_size = cliq_size
 
         if weights is not None:
             cls.weights = weights

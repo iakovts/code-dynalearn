@@ -56,8 +56,9 @@ class BANetworkGenerator(RandomNetworkGenerator):
 
 class ModuleNetworkGenerator(RandomNetworkGenerator):
     def network(self, seed=None):
-        print("*")
-        return nx.barabasi_albert_graph(self.num_nodes, self.config.m, seed)
+        # print("*")
+        return nx.connected_caveman_graph(self.config.cliques, self.config.cliq_size)
+        # return nx.barabasi_albert_graph(self.num_nodes, self.config.m, seed)
 
 class ConfigurationNetworkGenerator(RandomNetworkGenerator):
     def __init__(self, config=None, weights=None, **kwargs):
