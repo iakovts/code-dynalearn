@@ -60,6 +60,25 @@ class NetworkConfig(Config):
         return cls
 
     @classmethod
+    def mod_net(cls, m=2, num_nodes=1000, transforms=None, weights=None, layers=None):
+        """Returns a modular network generator object"""
+        cls = cls()
+        cls.name = "ModuleNetworkGenerator"
+        cls.num_nodes = num_nodes
+        cls.m = m
+
+        if weights is not None:
+            cls.weights = weights
+        if transforms is not None:
+            cls.transforms = transforms
+
+        if isinstance(layers, int):
+            cls.layers = [f"layer{i}" for i in range(layers)]
+        elif isinstance(layers, list):
+            cls.layers = layers
+        return cls
+
+    @classmethod
     def w_gnp(cls, num_nodes=1000, p=0.004):
         w = WeightConfig.uniform()
         t = TransformConfig.sparcifier()
@@ -79,6 +98,7 @@ class NetworkConfig(Config):
         t = TransformConfig.sparcifier()
         cls = cls.ba(num_nodes=num_nodes, m=m, weights=w, transforms=t, layers=layers)
         return cls
+
 
     @property
     def is_weighted(self):

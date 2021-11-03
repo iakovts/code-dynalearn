@@ -38,6 +38,7 @@ class RandomNetworkGenerator(NetworkGenerator):
             g = self.transforms(g)
             return Network(data=g)
 
+# TODO: Add modular generator object here
 
 class GNPNetworkGenerator(RandomNetworkGenerator):
     def network(self, seed=None):
@@ -53,6 +54,10 @@ class BANetworkGenerator(RandomNetworkGenerator):
     def network(self, seed=None):
         return nx.barabasi_albert_graph(self.num_nodes, self.config.m, seed)
 
+class ModuleNetworkGenerator(RandomNetworkGenerator):
+    def network(self, seed=None):
+        print("*")
+        return nx.barabasi_albert_graph(self.num_nodes, self.config.m, seed)
 
 class ConfigurationNetworkGenerator(RandomNetworkGenerator):
     def __init__(self, config=None, weights=None, **kwargs):
