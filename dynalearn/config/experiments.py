@@ -76,7 +76,7 @@ class ExperimentConfig(Config):
         if not os.path.exists(path_to_summary):
             os.makedirs(path_to_summary)
         cls.dynamics = dynamics_config[dynamics]
-        cls.networks = network_config[network] # Is a class
+        cls.networks = network_config[network]
         cls.model = gnn_config[dynamics]
         if cls.networks.is_weighted:
             cls.dynamics.is_weighted = True
