@@ -7,6 +7,8 @@ from .generator import NetworkGenerator
 from .transform import NetworkTransformList
 from .weight import EmptyWeightGenerator
 
+from .modular_net import generate_modular_graph
+
 
 class RandomNetworkGenerator(NetworkGenerator):
     def __init__(self, config=None, weights=None, transforms=[], **kwargs):
@@ -38,7 +40,9 @@ class RandomNetworkGenerator(NetworkGenerator):
             g = self.transforms(g)
             return Network(data=g)
 
+
 # TODO: Add modular generator object here
+
 
 class GNPNetworkGenerator(RandomNetworkGenerator):
     def network(self, seed=None):
@@ -54,11 +58,16 @@ class BANetworkGenerator(RandomNetworkGenerator):
     def network(self, seed=None):
         return nx.barabasi_albert_graph(self.num_nodes, self.config.m, seed)
 
+
 class ModuleNetworkGenerator(RandomNetworkGenerator):
     def network(self, seed=None):
         # print("*")
-        return nx.connected_caveman_graph(self.config.cliques, self.config.cliq_size)
+        return generate_modular_graph(
+            self.config.nodes_in_mod, self.config.p_mod, self.config.connections
+        )
+        # return nx.connected_caveman_graph(self.config.cliques, self.config.cliq_size)
         # return nx.barabasi_albert_graph(self.num_nodes, self.config.m, seed)
+
 
 class ConfigurationNetworkGenerator(RandomNetworkGenerator):
     def __init__(self, config=None, weights=None, **kwargs):
