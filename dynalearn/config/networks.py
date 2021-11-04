@@ -64,7 +64,7 @@ class NetworkConfig(Config):
         """Write some documentaion"""
         cls = cls()
         cls.name = "ModuleNetworkGenerator"
-        cls.num_nodes = nodes_in_mod * 2
+        cls.num_nodes = np.sum(nodes_in_mod)
         cls.nodes_in_mod = nodes_in_mod
         cls.p_mod = p_mod
         cls.connections = connections
