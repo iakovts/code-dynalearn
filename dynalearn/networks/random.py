@@ -7,7 +7,7 @@ from .generator import NetworkGenerator
 from .transform import NetworkTransformList
 from .weight import EmptyWeightGenerator
 
-from .modular_net import generate_modular_graph
+from .modular_net import gen_modular_network
 
 
 class RandomNetworkGenerator(NetworkGenerator):
@@ -41,8 +41,6 @@ class RandomNetworkGenerator(NetworkGenerator):
             return Network(data=g)
 
 
-# TODO: Add modular generator object here
-
 
 class GNPNetworkGenerator(RandomNetworkGenerator):
     def network(self, seed=None):
@@ -62,7 +60,7 @@ class BANetworkGenerator(RandomNetworkGenerator):
 class ModuleNetworkGenerator(RandomNetworkGenerator):
     def network(self, seed=None):
         # print("*")
-        return generate_modular_graph(
+        return gen_modular_network(
             self.config.nodes_in_mod, self.config.p_mod, self.config.connections
         )
         # return nx.connected_caveman_graph(self.config.cliques, self.config.cliq_size)

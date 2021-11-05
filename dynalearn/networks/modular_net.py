@@ -51,6 +51,7 @@ def transform_mod_args(arg):
         arg = [arg] * 2
     return arg
 
+
 def randm(i, mod_number):
     """Returns the index of a random module to connect to, excluding the current"""
     j = np.random.choice(mod_number, replace=True)
@@ -91,9 +92,9 @@ def gen_modular_network(n_mod=40, p_mod=0.2, connections=3):
     for i in mod_number:
         for _ in range(connections):
             j = randm(i, mod_number)
-            n1 = np.random.choice(n_mod[i], replace=False) + np.sum(n_mod[0:i-1])
-            n2 = np.random.choice(n_mod[j], replace=False) + np.sum(n_mod[0:j-1])
+            n1 = np.random.choice(n_mod[i], replace=False) + np.sum(n_mod[:i-1])
+            n2 = np.random.choice(n_mod[j], replace=False) + np.sum(n_mod[:j-1])
             print(n1, n2)
             g.add_edge(n1, n2)
 
-    return (g, g_tot)
+    return g
