@@ -7,6 +7,7 @@ __networks__ = {
     "GNPNetworkGenerator": GNPNetworkGenerator,
     "GNMNetworkGenerator": GNMNetworkGenerator,
     "BANetworkGenerator": BANetworkGenerator,
+    "ModuleNetworkGenerator": ModuleNetworkGenerator,
     "ConfigurationNetworkGenerator": ConfigurationNetworkGenerator,
 }
 

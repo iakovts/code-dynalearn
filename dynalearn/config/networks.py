@@ -60,6 +60,34 @@ class NetworkConfig(Config):
         return cls
 
     @classmethod
+    def mod_net(
+        cls,
+        nodes_in_mod=20,
+        p_mod=0.2,
+        connections=3,
+        weights=None,
+        transforms=None,
+        layers=None,
+    ):
+        """Write some documentaion"""
+        cls = cls()
+        cls.name = "ModuleNetworkGenerator"
+        cls.num_nodes = np.sum(nodes_in_mod)
+        cls.nodes_in_mod = nodes_in_mod
+        cls.p_mod = p_mod
+        cls.connections = connections
+        # cls.num_nodes = num_node
+        if weights is not None:
+            cls.weights = weights
+        if transforms is not None:
+            cls.transforms = transforms
+        if isinstance(layers, int):
+            cls.layers = [f"layer{i}" for i in range(layers)]
+        elif isinstance(layers, list):
+            cls.layers = layers
+        return cls
+
+    @classmethod
     def w_gnp(cls, num_nodes=1000, p=0.004):
         w = WeightConfig.uniform()
         t = TransformConfig.sparcifier()

@@ -12,6 +12,7 @@ network_config = {
     "w_gnp": NetworkConfig.w_gnp(),
     "w_ba": NetworkConfig.w_ba(),
     "mw_ba": NetworkConfig.mw_ba(),
+    "mod_net" : NetworkConfig.mod_net(),
 }
 dynamics_config = {
     "sis": DynamicsConfig.sis(),
