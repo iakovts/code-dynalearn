@@ -19,24 +19,28 @@ dynamics_config = {
     "plancksis": DynamicsConfig.plancksis(),
     "sissis": DynamicsConfig.sissis(),
     "dsir": DynamicsConfig.dsir(),
+    "modsis": DynamicsConfig.modsis(),
 }
 gnn_config = {
     "sis": TrainableConfig.sis(),
     "plancksis": TrainableConfig.plancksis(),
     "sissis": TrainableConfig.sissis(),
     "dsir": TrainableConfig.dsir(),
+    "modsis": TrainableConfig.sis(),
 }
 metrics_config = {
     "sis": MetricsConfig.sis(),
     "plancksis": MetricsConfig.plancksis(),
     "sissis": MetricsConfig.sissis(),
     "dsir": MetricsConfig.dsir(),
+    "modsis": MetricsConfig.sis(),
 }
 trainingmetrics = {
     "sis": ["jensenshannon", "model_entropy"],
     "plancksis": ["jensenshannon", "model_entropy"],
     "sissis": ["jensenshannon", "model_entropy"],
     "dsir": ["jensenshannon", "model_entropy"],
+    "modsis": ["jensenshannon", "model_entropy"],
 }
 
 
@@ -78,6 +82,9 @@ class ExperimentConfig(Config):
         cls.dynamics = dynamics_config[dynamics]
         cls.networks = network_config[network]
         cls.model = gnn_config[dynamics]
+        if network == "mod_net":
+            cls.dynamics.first_node_size = cls.networks.first_node_size
+
         if cls.networks.is_weighted:
             cls.dynamics.is_weighted = True
             cls.model.is_weighted = True
@@ -96,7 +103,7 @@ class ExperimentConfig(Config):
                 weight_type, compounded=False, reduce=False, total=True
             )
             cls.train_details = TrainingConfig.continuous()
-        elif dynamics in ["sis", "plancksis", "sissis"]:
+        elif dynamics in ["sis", "plancksis", "sissis", "modsis"]:
             cls.dataset = DiscreteDatasetConfig.get_config(weight_type)
             cls.train_details = TrainingConfig.discrete()
         else:

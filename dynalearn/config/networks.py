@@ -72,11 +72,16 @@ class NetworkConfig(Config):
         """Write some documentaion"""
         cls = cls()
         cls.name = "ModuleNetworkGenerator"
-        cls.num_nodes = np.sum(nodes_in_mod)
+        if isinstance(nodes_in_mod, list) and len(nodes_in_mod) >=2:
+            cls.num_nodes = np.sum(nodes_in_mod)
+            cls.first_node_size = nodes_in_mod[0]
+        else:
+            cls.num_nodes = nodes_in_mod * 2
+            cls.first_node_size = nodes_in_mod
+
         cls.nodes_in_mod = nodes_in_mod
         cls.p_mod = p_mod
         cls.connections = connections
-        # cls.num_nodes = num_node
         if weights is not None:
             cls.weights = weights
         if transforms is not None:
