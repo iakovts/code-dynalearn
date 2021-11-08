@@ -3,6 +3,7 @@ from .stochastic_epidemics import (
     SIR,
     PlanckSIS,
     AsymmetricSISSIS,
+    SISModular,
 )
 from .deterministic_epidemics import DSIR, IncSIR
 from .trainable import (
@@ -15,6 +16,7 @@ from .trainable import (
 
 __dynamics__ = {
     "SIS": SIS,
+    "SISModular": SISModular,
     "SIR": SIR,
     "DSIR": DSIR,
     "IncSIR": IncSIR,

@@ -69,3 +69,12 @@ class DynamicsConfig(Config):
         epsilon = 1e-5
         cls.init_param = epsilon
         return cls
+
+    @classmethod
+    def modsis(cls):
+        cls = cls()
+        cls.name = "SISModular"
+        cls.infection = 0.04
+        cls.recovery = 0.08
+        cls.init_param = None
+        return cls

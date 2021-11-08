@@ -86,3 +86,6 @@ class StochasticEpidemics(Dynamics):
 
     def number_of_infected(self, x):
         raise NotImplementedError()
+
+    def predict(self):
+        raise NotImplementedError
